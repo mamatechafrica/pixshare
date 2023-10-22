@@ -22,8 +22,8 @@ PixShare is a photo-sharing platform that allows users to upload, view, and shar
 
 ## First Iteration
 
-1. **Advanced Search:** Implement more advanced search options, including filtering by date, location, and other metadata.
-   - Gems: Elasticsearch or Solr for more complex search functionality.
+1. **Collections:** Allow users to create collections or albums and organize their photos into them.
+   - Gems: ActsAsTaggableOn for creating collections or albums.
 
 2. **User Follows:** Allow users to follow other users and see their recent uploads.
    - Gems: ActsAsFollower for implementing the following feature.
@@ -31,17 +31,17 @@ PixShare is a photo-sharing platform that allows users to upload, view, and shar
 
 ## Second Iteration
 
-1. **Geotagging:** Enable users to add geotags to their photos to show the location where the photo was taken.
-   - Gems: Geocoder for geolocation functionalities.
+1. **Advanced Search:** Implement more advanced search options, including filtering by date, location, and other metadata.
+   - Gems: Elasticsearch for more complex search functionality.
 
-2. **Collections:** Allow users to create collections or albums and organize their photos into them.
-   - Gems: ActsAsTaggableOn for creating collections or albums.
+2. **Geotagging:** Enable users to add geotags to their photos to show the location where the photo was taken.
+   - Gems: Geocoder for geolocation functionalities.
 
 3. **Notifications:** Implement a notification system to inform users about comments, likes, and new followers.
    - Gems: PublicActivity for building a notification system.
     
 4. **Photo Editing:** Implement basic photo editing capabilities, such as cropping, filters, and basic adjustments.
-   - Gems: CarrierWave or MiniMagick for image manipulation.
+   - Gems: MiniMagick for image manipulation.
 
 
 ---
