@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PixShare</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="body">
+      <header class="header">
+        <%= render 'layouts/shared/navbar' %>
+      </header>
+        <%= yield %>
+      <footer>
+        <%= render 'layouts/shared/footer' %>
+    </footer>
+  </body>
+</html>

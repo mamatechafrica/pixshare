@@ -1,0 +1,16 @@
+
+<!-- _navbar.html.erb -->
+<nav class="navbar">
+  <div class="nav-content">
+    <a><%= link_to "Home", root_path %></a>
+    <a><%= link_to "Upload Photo", new_photo_path %></a>
+    <% if user_signed_in? %>
+      <a><%= link_to "My Profile", user_path(current_user) %></a>
+      <a><%= link_to "Logout", destroy_user_session_path, method: :delete %></a>
+    <% else %>
+      <a><%= link_to "Sign Up", new_user_registration_path %></a>
+      <a><%= link_to "Login", new_user_session_path %></a>
+    <% end %>
+    <a><%= link_to "Search", search_index_path %></a>
+  </div>
+</nav>

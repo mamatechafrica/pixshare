@@ -1,0 +1,67 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ */
+
+ .navbar {
+    overflow: hidden;
+    background-color: #333;
+    list-style-type: none; /* Removes bullet points */
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  /* Style the links inside the navigation bar */
+  .navbar-link {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+  }
+  
+  /* Change the color of links on hover */
+  .navbar-link:hover {
+    background-color: #ddd;
+    color: black;
+  }
+
+  .title {
+    color: #333;
+    text-align: center;
+    font-size: 50px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;    
+  }
+  
+ /* Footer style */
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #f4f4f4;
+    color: #757575;
+    padding: 15px;
+  }
+  
+  /* Style for footer text */
+  .footer-text {
+    display: inline-block;
+    margin: 0 10px;
+  }
+  
