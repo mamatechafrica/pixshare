@@ -254,7 +254,7 @@ GEM
 PLATFORMS
   platform x86_64-linux
   x86_64-darwin-20
-  x86_64-linux
+  
 
 DEPENDENCIES
   bootsnap
