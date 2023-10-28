@@ -28,7 +28,7 @@ gem "stimulus-rails"
 gem "jbuilder"
 
 # Create simple forms
-gem 'simple_form'
+# gem 'simple_form'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
@@ -56,6 +56,11 @@ gem 'jquery-rails'
 gem "image_processing", "~> 1.2"
 
 gem 'devise'
+gem 'twitter-bootstrap-rails'
+gem 'devise-bootstrap-views'
+
+
+gem 'mini_racer', platforms: :ruby
 
 
 group :development, :test do
