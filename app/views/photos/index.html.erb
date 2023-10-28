@@ -3,11 +3,14 @@
 <h1>Photos</h1>
 
 <div id="photos">
-  <% @photos.each do |photo| %>
-    <%= render photo %>
-    <p>
-      <%= link_to "Show this photo", photo %>
-    </p>
+<% if @photos %>
+    <% @photos.each do |photo| %>
+      <%= render photo %>
+      <p>
+        <%= link_to "Show this photo", photo %>
+    <% end %>
+  <% else %>
+    <p>No photos found.</p>
   <% end %>
 </div>
 
