@@ -1,16 +1,45 @@
-
 <!-- _navbar.html.erb -->
-<nav class="navbar">
-  <div class="nav-content">
-    <a><%= link_to "Pix Share", root_path %></a>
-    <a><%= link_to "Upload Photo", new_photo_path %></a>
-    <% if user_signed_in? %>
-      <a><%= link_to "My Profile", user_path(current_user) %></a>
-      <a><%= link_to "Logout", destroy_user_session_path, method: :delete %></a>
-    <% else %>
-      <a><%= link_to "Sign Up", new_user_registration_path %></a>
-      <a><%= link_to "Login", new_user_session_path %></a>
-    <% end %>
-    <a><%= link_to "Search", search_index_path %></a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+   <%= link_to root_path, class: "navbar-brand" do %>
+  <%= image_tag("ps-icon.png", alt: "Pix Share Logo", class: "logo-image", style: "max-height:50px; max-width:100px; border-radius: 10px;") %>
+<% end %>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="<%= new_photo_path %>">Upload Photo</a>
+        </li>
+        <li class="nav-item">
+          <form class="form-inline" action="<%= search_index_path %>">
+  <div class="input-group">
+    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+  </div>
+</form>
+
+        </li>
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <a class="nav-link" href="<%= user_path(current_user) %>">My Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<%= destroy_user_session_path %>" data-method="delete">Logout</a>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <a class="nav-link" href="<%= new_user_registration_path %>">Sign Up</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<%= new_user_session_path %>">Login</a>
+          </li>
+        <% end %>
+      </ul>
+    </div>
   </div>
 </nav>
+
+
