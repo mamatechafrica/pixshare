@@ -32,7 +32,7 @@
           </li>
           <li class="nav-item">
             <%= link_to edit_user_registration_path, class: "nav-link" do %>
-              <%= image_tag(current_user.avatar, class: "avatar-image", style: "max-height:40px; max-width:40px; border-radius: 50%;") if current_user.avatar.attached? %>
+              <%= image_tag(current_user.avatar, class: "avatar-image", style: "max-height:45px; max-width:45px; border-radius: 20%;") if current_user.avatar.attached? %>
             <% end %>
           </li>
         <% else %>

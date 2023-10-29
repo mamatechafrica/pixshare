@@ -1,19 +1,26 @@
 <div id="<%= dom_id user %>">
-    <p>
-    <strong>Avatar:</strong>
-    <% if user.avatar.attached? %>
-      <%= image_tag user.avatar, width: "10%" %>
-    <% end %>
-    </p>
-    
-    <p>
-      <strong>Name:</strong>
-      <%= user.name %>
-    </p>
-
-    <p>
-      <strong>Email:</strong>
-      <%= user.email %>
-    </p>
-
+   <div class="row align-items-center">
+      <!-- User Info -->
+      <div class="col-xl-12 col-lg-12 col-md-12 col-12">
+         <div class="pt-16 rounded-top-md" style="background: url(../assets/images/background/profile-bg.jpg) no-repeat; background-size: cover;"></div>
+         <div class="d-flex align-items-end justify-content-between bg-white px-4 pt-2 pb-4 rounded-none rounded-bottom-md shadow-sm">
+            <div class="d-flex align-items-center">
+               <div class="me-2 position-relative d-flex justify-content-end align-items-end mt-n5">
+                     <p>
+                     <% if user.avatar.attached? %>
+                        <%= image_tag user.avatar, width: "25%" %>
+                     <% end %>
+                     </p>
+               </div>
+               <div class="lh-1">
+                  <h2 class="mb-0"><%= user.name %></h2>
+                  <p class="mb-0 d-block"><%= user.email %></p>
+               </div>
+            </div>
+            <div>
+               <a class="btn btn-dark btn-sm d-none d-md-block" href="<%= new_photo_path %>">Upload Photos</a>
+            </div>
+         </div>
+      </div>
+   </div>
 </div>
