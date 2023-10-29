@@ -10,6 +10,15 @@
   </p>
 
   <p>
+    <strong>IMAGES:</strong>
+    <% if photo.images.attached? %>
+      <% photo.images.each do |image| %>
+        <%= image_tag image, width: "10%" %>
+      <% end %>
+    <% end %>
+  </p>
+
+  <p>
     <strong>User:</strong>
     <%= photo.user_id %>
   </p>

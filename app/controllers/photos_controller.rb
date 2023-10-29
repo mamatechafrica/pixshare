@@ -11,7 +11,7 @@ class PhotosController < ApplicationController
 
   def create
     @photo = @user.photos.build(photo_params)
-    @photo.image.attach(params[:photo][:image]) # This attaches the uploaded image
+    @photo.images.attach(params[:photo][:images]) # This attaches the uploaded image
 
     if @photo.save
       redirect_to @photo, notice: 'Photo was successfully created.'
@@ -31,6 +31,6 @@ class PhotosController < ApplicationController
   end
 
   def photo_params
-    params.require(:photo).permit(:attribute1, :attribute2, :attribute3, :image)
+    params.require(:photo).permit(:title, :description, images: [])
   end
 end
