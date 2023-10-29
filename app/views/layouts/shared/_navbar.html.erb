@@ -8,8 +8,8 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
-      <ul class="navbar-nav mb-2 mb-lg-0">
+    <div class="collapse navbar-collapse align-items-center" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link" href="<%= new_photo_path %>">Upload Photo</a>
         </li>
@@ -20,32 +20,30 @@
         <button class="btn btn-outline-dark" type="submit">Search</button>
       </form>
 
-      <ul class="navbar-nav">
+      <ul class="navbar-nav d-flex align-items-center">
         <% if user_signed_in? %>
-          <li class="nav-item">
-            <a class="nav-link" href="<%= user_path(current_user) %>">
-              <button class="btn btn-outline-dark" type="submit">My Profile</button>
-            </a>
+          <li class="nav-item me-3">
+            <%= link_to user_path(current_user), class: "btn btn-outline-dark" do %>
+              My Profile
+            <% end %>
+          </li>
+          <li class="nav-item me-3">
+            <a class="btn btn-outline-dark" href="<%= destroy_user_session_path %>" data-method="delete">Logout</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<%= destroy_user_session_path %>" data-method="delete">
-              <button class="btn btn-outline-dark" type="submit">Logout</button>
-            </a>
+            <%= link_to edit_user_registration_path, class: "nav-link" do %>
+              <%= image_tag(current_user.avatar, class: "avatar-image", style: "max-height:40px; max-width:40px; border-radius: 50%;") if current_user.avatar.attached? %>
+            <% end %>
           </li>
         <% else %>
-          <li class="nav-item">
-            <a class="nav-link" href="<%= new_user_registration_path %>">
-              <button class="btn btn-outline-dark" type="submit">Sign Up</button>
-            </a>
+          <li class="nav-item me-3">
+            <a class="btn btn-outline-dark" href="<%= new_user_registration_path %>">Sign Up</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<%= new_user_session_path %>">
-             <button class="btn btn-outline-dark" type="submit">Login</button>
-            </a>
+            <a class="btn btn-outline-dark" href="<%= new_user_session_path %>">Login</a>
           </li>
         <% end %>
       </ul>
     </div>
   </div>
 </nav>
-
