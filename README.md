@@ -11,19 +11,20 @@ PixShare is a photo-sharing platform that allows users to upload, view, and shar
 
 3. **Photo Display:** Display photos uploaded by users on the platform.
 
-4. **User Profile:** Allow users to have their profiles with basic information and a list of their uploaded photos.
-   - Gems: Simple_form for form generation.
+4. **Collections:** Allow users to create collections or albums and organize their photos into them.
+   - Gems: ActsAsTaggableOn for creating collections or albums.
 
-5. **Commenting:** Enable users to comment on photos.
-   - Gems: ActsAsCommentable for adding comments to models.
-
-6. **Basic Search:** Implement a basic search functionality to find photos based on their titles or tags.
-   - Gems: Ransack for simple search functionality.
 
 ## First Iteration
 
-1. **Collections:** Allow users to create collections or albums and organize their photos into them.
-   - Gems: ActsAsTaggableOn for creating collections or albums.
+5. **User Profile:** Allow users to have their profiles with basic information and a list of their uploaded photos.
+   - Gems: Simple_form for form generation.
+
+6. **Commenting:** Enable users to comment on photos.
+   - Gems: ActsAsCommentable for adding comments to models.
+
+7. **Basic Search:** Implement a basic search functionality to find photos based on their titles or tags.
+   - Gems: Ransack for simple search functionality.
 
 2. **User Follows:** Allow users to follow other users and see their recent uploads.
    - Gems: ActsAsFollower for implementing the following feature.
