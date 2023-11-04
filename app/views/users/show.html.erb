@@ -1,4 +1,5 @@
-<%= render @user %>
+<!-- app/views/users/show.html.erb -->
+<%= render partial: 'user', locals: { user: @user, photo: @photo } %>
 
 <div>
   <%# <%= link_to "Edit this user", edit_user_path(@user) %> 

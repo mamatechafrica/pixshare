@@ -8,6 +8,8 @@ class UsersController < ApplicationController
 
   # GET /users/1 or /users/1.json
   def show
+    @user = User.find(params[:id])
+    @photo = Photo.find_by(user_id: @user.id) # Assuming you have a Photo model associated with the User model
   end
 
   # GET /users/new

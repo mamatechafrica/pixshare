@@ -1,26 +1,39 @@
 <div id="<%= dom_id user %>">
-   <div class="row align-items-center">
-      <!-- User Info -->
-      <div class="col-xl-12 col-lg-12 col-md-12 col-12">
-         <div class="pt-16 rounded-top-md" style="background: url(../assets/images/background/profile-bg.jpg) no-repeat; background-size: cover;"></div>
-         <div class="d-flex align-items-end justify-content-between bg-white px-4 pt-2 pb-4 rounded-none rounded-bottom-md shadow-sm">
-            <div class="d-flex align-items-center">
-               <div class="me-2 position-relative d-flex justify-content-end align-items-end mt-n5">
-                     <p>
-                     <% if user.avatar.attached? %>
-                        <%= image_tag user.avatar, width: "25%" %>
-                     <% end %>
-                     </p>
-               </div>
-               <div class="lh-1">
-                  <h2 class="mb-0"><%= user.name %></h2>
-                  <p class="mb-0 d-block"><%= user.email %></p>
-               </div>
-            </div>
-            <div>
-               <a class="btn btn-dark btn-sm d-none d-md-block" href="<%= new_photo_path %>">Upload Photos</a>
-            </div>
-         </div>
+  <div class="row align-items-center">
+    <!-- User Info -->
+    <div class="col-xl-12 col-lg-12 col-md-12 col-12">
+      <div class="pt-16 rounded-top-md" style="background-color: #000; height: 80px; border-radius: 10px 10px 0 0;"></div>
+
+      <div class="d-flex align-items-end justify-content-between bg-white px-4 pt-2 pb-4 rounded-none rounded-bottom-md shadow-sm">
+        <div class="d-flex align-items-center">
+          <div class="me-2 position-relative d-flex justify-content-end align-items-end mt-n5">
+            <p>
+              <% if user.avatar.attached? %>
+                <%= image_tag user.avatar, width: "25%" %>
+              <% end %>
+            </p>
+          </div>
+          <div class="lh-1" style="margin-top: 10px;">
+            <h2 class="mb-0"><%= user.name %></h2>
+            <p class="mb-0 d-block"><%= user.email %></p>
+          </div>
+        </div>
+        <div>
+          <a class="btn btn-dark btn-sm d-none d-md-block" href="<%= new_photo_path %>">Upload Photos</a>
+        </div>
       </div>
-   </div>
+
+      <div id="<%= dom_id photo %>">
+        <p>
+          <strong>IMAGES:</strong>
+          <% if photo.images.attached? %>
+            <% photo.images.each do |image| %>
+              <%= image_tag image, width: "10%" %>
+            <% end %>
+          <% end %>
+        </p>
+      </div>
+      
+    </div>
+  </div>
 </div>

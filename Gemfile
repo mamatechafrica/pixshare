@@ -88,4 +88,4 @@ group :test do
   gem "webdrivers"
 end
 
-gem "pg"
+gem 'pg', '1.5.4'
