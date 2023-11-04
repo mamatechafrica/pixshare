@@ -27,6 +27,9 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
+gem 'bootstrap-icons-helper', '~> 1.0', '>= 1.0.1'
+
+
 # Create simple forms
 # gem 'simple_form'
 

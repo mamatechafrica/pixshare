@@ -24,6 +24,21 @@ class PhotosController < ApplicationController
     @photo = Photo.find(params[:id])
   end
 
+  # Add a new action to handle photo deletion
+  def destroy
+    @photo = Photo.find(params[:id])
+
+    # Check if the current user is the owner of the photo
+    if @photo.user == current_user
+      # Remove the photo from the database
+      @photo.destroy
+      redirect_to photos_path, notice: 'Photo was successfully deleted.'
+    else
+      # If the current user is not the owner, you can handle this as you see fit
+      redirect_to @photo, alert: 'You are not authorized to delete this photo.'
+    end
+  end
+
   private
 
   def set_user
