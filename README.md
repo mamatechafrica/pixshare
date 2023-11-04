@@ -1,6 +1,10 @@
 # PixShare
 PixShare is a photo-sharing platform that allows users to upload, view, and share photos. It is built using Ruby on Rails.
 
+Requires ruby-3.2.2 
+If not installed do: 'rvm install "ruby-3.2.2"'
+
+
 ## Minimum Viable Product (MVP)
 
 1. **User Authentication:** Allow users to sign up, log in, and log out.
