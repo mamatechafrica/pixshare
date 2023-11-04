@@ -1,5 +1,7 @@
 # PixShare
 
+![Alt Text](./app/assets/images/ps-logo.png)
+
 PixShare is a photo-sharing platform that allows users to upload, view, and share photos. It is built using Ruby on Rails.
 
 ## Minimum Viable Product (MVP)
