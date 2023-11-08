@@ -1,6 +1,21 @@
-<h1>Editing photo</h1>
+<h1>Editing Photo Collection</h1>
 
 <%= render "form", photo: @photo %>
+
+<% if @photo.images.attached? %>
+  <h2>Delete Images</h2>
+  <div class="photo-images">
+    <% @photo.images.each_with_index do |image, index| %>
+      <div style="border: 1px solid #ddd; border-radius: 5px; background: #f9f9f9; padding: 5px;">
+        <%= image_tag image, style: 'width: 100%; height: auto; margin-bottom: 10px;' %>
+        <%= form_with(model: @photo, url: photo_path(id: @photo.id, image_id: index), method: :delete, local: true) do |form| %>
+          <%= form.hidden_field :authenticity_token, value: form_authenticity_token %>
+          <%= form.submit 'Delete', data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
 
 <br>
 

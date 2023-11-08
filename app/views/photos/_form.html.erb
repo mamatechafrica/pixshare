@@ -20,16 +20,6 @@
     <%= form.text_area :description %>
   </div>
 
-  <%# Assuming 'images' is a has_many_attached association with Active Storage %>
-  <% if photo.images.attached? %>
-    <div>
-      <strong>Current Image(s):</strong>
-      <% photo.images.each do |image| %>
-        <%= image_tag(image) %>
-      <% end %>
-    </div>
-  <% end %>
-
   <div class="field">
     <%= form.label :images %>
     <%= form.file_field :images, multiple: true %>
