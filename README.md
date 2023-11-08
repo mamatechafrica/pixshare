@@ -6,9 +6,9 @@ PixShare is a photo-sharing platform that allows users to upload, view, and shar
 
 ## Minimum Viable Product (MVP)
 
-1. **User Authentication:** Allow users to sign up, log in, and log out. - [x]
+- [x] 1.  **User Authentication:** Allow users to sign up, log in, and log out. -[x]
 
-   - Gems: Devise for user authentication.
+  - Gems: Devise for user authentication.
 
 2. **Photo Upload:** Enable users to upload photos with appropriate metadata. - [x]
 
