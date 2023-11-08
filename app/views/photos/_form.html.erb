@@ -2,7 +2,6 @@
   <% if photo.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(photo.errors.count, "error") %> prohibited this photo from being saved:</h2>
-
       <ul>
         <% photo.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -21,16 +20,22 @@
     <%= form.text_area :description %>
   </div>
 
-  <%# <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%# <%= form.text_field :user_id %> 
-  <%# </div> %>
+  <%# Assuming 'images' is a has_many_attached association with Active Storage %>
+  <% if photo.images.attached? %>
+    <div>
+      <strong>Current Image(s):</strong>
+      <% photo.images.each do |image| %>
+        <%= image_tag(image) %>
+      <% end %>
+    </div>
+  <% end %>
 
   <div class="field">
     <%= form.label :images %>
     <%= form.file_field :images, multiple: true %>
+    <p>If you want to add new images or replace existing ones, please select them here.</p>
   </div>
-  
+
   <div>
     <%= form.submit %>
   </div>

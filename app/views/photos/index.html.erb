@@ -1,16 +1,19 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Photos</h1>
+<h1>Photo Gallery</h1>
 
 <div id="photos">
-<% if @photos %>
+  <% if @photos.any? { |photo| photo.images.attached? } %>
     <% @photos.each do |photo| %>
-      <%= render photo %>
-      <p>
-        <%= link_to "Show this photo", photo %>
+      <% if photo.images.attached? %>
+        <%= render photo %>
+        <p>
+          <%= link_to "Show this photo", photo %>
+        </p>
+      <% end %>
     <% end %>
   <% else %>
-    <p>No photos found.</p>
+    <p>No photos with images found.</p>
   <% end %>
 </div>
 

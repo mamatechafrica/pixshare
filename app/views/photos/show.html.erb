@@ -1,2 +1,27 @@
-<h1>Photos#show</h1>
-<p>Find me in app/views/photos/show.html.erb</p>
+<h1><%= @photo.title %></h1>
+<p><%= @photo.description %></p>
+
+<% if @photo.images.attached? %>
+  <div class="photo-images" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); grid-gap: 10px; align-items: center; justify-items: center;">
+    <% @photo.images.each_with_index do |image, index| %>
+      <div style="position: relative; border: 1px solid #ddd; border-radius: 5px; background: #f9f9f9; padding: 5px;">
+        <%= image_tag image, style: 'max-width: 100%; height: auto; margin-bottom: 10px;' %>
+
+        <% if @photo.user == current_user %>
+          <div style="text-align: center; margin-top: 10px;">
+            <%= form_with(model: @photo, url: photo_path(id: @photo.id, image_id: index), method: :delete, local: true) do |form| %>
+              <%= form.hidden_field :authenticity_token, value: form_authenticity_token %>
+              <%= form.submit 'Delete', data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p>No images attached to this photo.</p>
+<% end %>
+
+<div class="btn" style="margin-top: 50px; text-align: center;">
+  <%= link_to 'Edit', edit_photo_path(@photo), class: 'btn btn-primary' %>
+</div>
