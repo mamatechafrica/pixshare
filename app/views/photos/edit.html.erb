@@ -1,13 +1,43 @@
 <h1>Editing Photo Collection</h1>
 
+<style>
+  /* Mobile styles */
+  .photo-images {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 10px;
+    align-items: center;
+    justify-items: center;
+  }
+
+  /* Desktop styles */
+  @media (min-width: 768px) {
+    .photo-images {
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+  }
+
+  /* Styles to limit the number of images per row to three on desktop */
+  @media (min-width: 1024px) {
+    .photo-images {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  .photo-item {
+    margin: 10px; /* Adjust the margin as needed for spacing between items */
+  }
+</style>
+
 <%= render "form", photo: @photo %>
 
 <% if @photo.images.attached? %>
-  <h2>Delete Images</h2>
+  <h2>Edit Images</h2>
   <div class="photo-images">
     <% @photo.images.each_with_index do |image, index| %>
-      <div style="border: 1px solid #ddd; border-radius: 5px; background: #f9f9f9; padding: 5px;">
+      <div class="photo-item" style="border: 1px solid #ddd; border-radius: 5px; background: #f9f9f9; padding: 5px;">
         <%= image_tag image, style: 'width: 100%; height: auto; margin-bottom: 10px;' %>
+        
         <%= form_with(model: @photo, url: photo_path(id: @photo.id, image_id: index), method: :delete, local: true) do |form| %>
           <%= form.hidden_field :authenticity_token, value: form_authenticity_token %>
           <%= form.submit 'Delete', data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
@@ -23,3 +53,4 @@
   <%= link_to "Show this photo", @photo %> |
   <%= link_to "Back to photos", photos_path %>
 </div>
+

@@ -26,6 +26,10 @@
   }
 </style>
 
+<div class="btn" style="margin-top: 10px; margin-bottom: 20px; text-align: center;">
+  <%= link_to 'Edit', edit_photo_path(@photo), class: 'btn btn-primary' %>
+</div>
+
 <% if @photo.images.attached? %>
   <div class="photo-images">
     <% @photo.images.each_with_index do |image, index| %>
@@ -38,6 +42,4 @@
   <p>No images attached to this photo.</p>
 <% end %>
 
-<div class="btn" style="margin-top: 50px; text-align: center;">
-  <%= link_to 'Edit', edit_photo_path(@photo), class: 'btn btn-primary' %>
-</div>
+
