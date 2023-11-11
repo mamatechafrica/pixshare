@@ -50,8 +50,8 @@
       <% end %>
     </div>
 <% end %>
-<div>
-  <%= link_to "Show this photo", @photo %> |
-  <%= link_to "Back to photos", photos_path %>
+<div class="d-flex justify-content-between">
+  <%= link_to "Show", @photo, class: "btn btn-info" %>
+  <%= link_to "Back", photos_path, class: "btn btn-secondary" %>
 </div>
 
