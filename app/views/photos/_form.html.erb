@@ -10,23 +10,23 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
+  <div class="mb-3">
+    <%= form.label :title, style: "display: block", class: "form-label" %>
+    <%= form.text_field :title, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_area :description %>
+  <div class="mb-3">
+    <%= form.label :description, style: "display: block", class: "form-label" %>
+    <%= form.text_area :description, class: "form-control" %>
   </div>
 
   <div class="field">
-    <%= form.label :images %>
-    <%= form.file_field :images, multiple: true %>
-    <p>If you want to add new images or replace existing ones, please select them here.</p>
+    <%= form.label :images, class: "form-label" %>
+    <%= form.file_field :images, multiple: true, class: "form-control" %>
+    <p class="form-text">If you want to add new images or replace existing ones, please select them here.</p>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="mb-3">
+    <%= form.submit "Add Photo", class: "btn btn-dark" %>
   </div>
 <% end %>
