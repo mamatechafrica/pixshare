@@ -6,7 +6,7 @@
   <% if @photos.any? { |photo| photo.images.attached? } %>
     <% @photos.each do |photo| %>
       <% if photo.images.attached? %>
-        <div class="photo-item" style="border: 1px solid #ddd; border-radius: 5px; background: #f9f9f9; padding: 5px;">
+        <div class="photo-item" style="border: 1px solid #ddd; border-radius: 5px; background: #f9f9f9; padding: 8px;">
           <h2><%= photo.title %></h2>
           <p><%= photo.description %></p>
           <% photo.images.each_with_index do |image, index| %>
@@ -14,10 +14,10 @@
               <%= image_tag image, style: 'width: 100%; height: auto; margin-bottom: 10px;' %>
             </div>
           <% end %>
-          <p>
-            <%= link_to "Show", photo, class: "btn btn-info" %>
-            <%= link_to "Edit", edit_photo_path(photo), class: 'btn btn-primary' %>
-          </p>
+          <p class="d-flex justify-content-between">
+            <%= link_to "Show", photo, class: "btn btn-info m-2" %> <!-- Add mb-2 class for margin bottom -->
+            <%= link_to "Edit", edit_photo_path(photo), class: 'btn btn-primary m-2' %> <!-- Add mb-2 class for margin bottom -->
+          </p>                  
         </div>
       <% end %>
     <% end %>
