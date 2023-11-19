@@ -302,7 +302,7 @@ DEPENDENCIES
   jbuilder
   jquery-rails
   mini_racer
-  pg (= 1.5.4)
+  pg (>= 1.5.4, < 2.0)
   puma (~> 5.0)
   rails (~> 7.0.7)
   sassc-rails
