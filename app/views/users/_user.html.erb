@@ -23,17 +23,19 @@
         </div>
       </div>
 
-      <div id="<%= dom_id photo %>">
-        <p>
-          <strong>IMAGES:</strong>
-          <% if photo.images.attached? %>
-            <% photo.images.each do |image| %>
-              <%= image_tag image, width: "10%" %>
+      <% if photo.present? %>
+        <div id="<%= dom_id photo %>">
+          <p>
+            <strong>IMAGES:</strong>
+            <% if photo.images.attached? %>
+              <% photo.images.each do |image| %>
+                <%= image_tag image, width: "10%" %>
+              <% end %>
             <% end %>
-          <% end %>
-        </p>
-      </div>
-      
+          </p>
+        </div>
+      <% end %>
+
     </div>
   </div>
 </div>
