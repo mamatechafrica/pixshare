@@ -19,20 +19,20 @@
           </div>
         </div>
         <div>
-          <a class="btn btn-dark btn-sm d-none d-md-block" href="<%= new_photo_path %>">Upload Photos</a>
+          <a class="btn btn-dark btn-sm d-none d-md-block" href="<%= new_photo_path %>">Upload More</a>
         </div>
       </div>
 
       <% if photo.present? %>
         <div id="<%= dom_id photo %>">
-          <p>
+          <div style="margin-top: 20px">
             <strong>IMAGES:</strong>
             <% if photo.images.attached? %>
               <% photo.images.each do |image| %>
-                <%= image_tag image, width: "10%" %>
+                <%= image_tag image, width: "50%" %>
               <% end %>
             <% end %>
-          </p>
+          </>
         </div>
       <% end %>
 
