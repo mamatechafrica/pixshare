@@ -1,7 +1,7 @@
 <!-- app/views/users/show.html.erb -->
 <%= render partial: 'user', locals: { user: @user, photo: @photo } %>
 
-<div style="padding-bottom: 40px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+<div style="padding-bottom: 40px; padding-top: 20px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
   <%= link_to "Edit", edit_user_path(@user), class: "btn btn-dark" %>
 
   <!-- <%= button_to "Destroy this user", @user, method: :delete, class: "btn btn-danger" %> -->
