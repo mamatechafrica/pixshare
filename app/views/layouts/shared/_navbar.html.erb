@@ -1,52 +1,52 @@
 <!-- _navbar.html.erb -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-  <div class="container-fluid">
-    <%= link_to root_path, class: "navbar-brand" do %>
-    <%= image_tag("ps-icon.png", alt: "Pix Share Logo", class: "logo-image", style: "max-height:50px; max-width:50px; border-radius: 10px;") %>
-    <% end %>
-    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-      <li class="nav-item">
-        <a class="nav-link" href="<%= new_photo_path %>">
-          <button type="button" class="btn btn-dark">
-            <%= bootstrap_icon "upload", width: 20, height: 20, fill: "white" %>
-          </button>
-        </a>
-      </li>
-    </ul>
-
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse align-items-center" id="navbarSupportedContent">
-      <form class="d-flex mx-auto" action="<%= search_index_path %>">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-dark" type="submit">Search</button>
-      </form>
-
-      <ul class="navbar-nav d-flex align-items-center">
-        <% if user_signed_in? %>
-          <li class="nav-item me-3">
-            <%= link_to user_path(current_user), class: "btn btn-outline-dark" do %>
-              My Profile
-            <% end %>
-          </li>
-          <li class="nav-item me-3">
-            <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-outline-dark" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to edit_user_registration_path, class: "nav-link" do %>
-              <%= image_tag(current_user.avatar, class: "avatar-image", style: "max-height:45px; max-width:45px; border-radius: 20%;") if current_user.avatar.attached? %>
-            <% end %>
-          </li>
-        <% else %>
-          <li class="nav-item me-3">
-            <a class="btn btn-outline-dark" href="<%= new_user_registration_path %>">Sign Up</a>
-          </li>
-          <li class="nav-item">
-            <a class="btn btn-outline-dark" href="<%= new_user_session_path %>">Login</a>
-          </li>
-        <% end %>
+  <nav class="navbar navbar-expand-lg sticky-top" style="display: flex; justify-content: center; align-items: center; position: fixed; left: 0; width: 100%; background-color: #ffffff; color: #757575; padding: 6px;">
+    <div class="container-fluid">
+      <%= link_to root_path, class: "navbar-brand" do %>
+      <%= image_tag("ps-icon.png", alt: "Pix Share Logo", class: "logo-image", style: "max-height:50px; max-width:50px; border-radius: 10px;") %>
+      <% end %>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="<%= new_photo_path %>">
+            <button type="button" class="btn btn-dark">
+              <%= bootstrap_icon "upload", width: 20, height: 20, fill: "white" %>
+            </button>
+          </a>
+        </li>
       </ul>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse align-items-center" id="navbarSupportedContent">
+        <form class="d-flex mx-auto" action="<%= search_index_path %>">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-dark" type="submit">Search</button>
+        </form>
+
+        <ul class="navbar-nav d-flex align-items-center">
+          <% if user_signed_in? %>
+            <li class="nav-item me-3">
+              <%= link_to user_path(current_user), class: "btn btn-outline-dark" do %>
+                My Profile
+              <% end %>
+            </li>
+            <li class="nav-item me-3">
+              <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-outline-dark" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to edit_user_registration_path, class: "nav-link" do %>
+                <%= image_tag(current_user.avatar, class: "avatar-image", style: "max-height:45px; max-width:45px; border-radius: 20%;") if current_user.avatar.attached? %>
+              <% end %>
+            </li>
+          <% else %>
+            <li class="nav-item me-3">
+              <a class="btn btn-outline-dark" href="<%= new_user_registration_path %>">Sign Up</a>
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-outline-dark" href="<%= new_user_session_path %>">Login</a>
+            </li>
+          <% end %>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
