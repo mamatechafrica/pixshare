@@ -1,13 +1,15 @@
 Rails.application.routes.draw do
   devise_for :users
-  get 'search/index'
-  resources :comments
-  resources :photos
-  get 'photos/show'
-  resources :users
-  get 'home/index'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  resources :users, only: [:show]
 
-  # Defines the root path route ("/")
+  authenticated :user do
+    # root 'home#index', as: :authenticated_root
+
+    resources :comments
+    resources :photos
+    resources :users
+  end
+  get 'home/index'
   root 'home#index'
+  get 'search/index', to: 'search#index', as: :search_index
 end
