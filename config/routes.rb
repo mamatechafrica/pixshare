@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'home/index'
+  root 'home#index'
+  get 'search/index', to: 'search#index', as: :search_index
+
   devise_for :users
   resources :users, only: [:show]
 
@@ -9,7 +13,4 @@ Rails.application.routes.draw do
     resources :photos
     resources :users
   end
-  get 'home/index'
-  root 'home#index'
-  get 'search/index', to: 'search#index', as: :search_index
 end
