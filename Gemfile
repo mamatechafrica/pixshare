@@ -27,8 +27,8 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
-gem 'bootstrap-icons-helper', '~> 1.0', '>= 1.0.1'
-
+gem "tailwindcss-rails"
+gem 'cssbundling-rails', '~> 1.1'
 
 # Create simple forms
 # gem 'simple_form'
@@ -51,9 +51,8 @@ gem "bootsnap", require: false
 # Use Sass to process CSS
 gem "sassc-rails"
 
-gem 'bootstrap', '~> 5.0.2'
+gem 'rake', '13.0.6'
 
-gem 'jquery-rails'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem 'active_storage'
@@ -64,6 +63,7 @@ gem 'devise'
 gem 'twitter-bootstrap-rails'
 gem 'devise-bootstrap-views'
 
+gem 'jquery-rails'
 
 gem 'mini_racer', platforms: :ruby
 
