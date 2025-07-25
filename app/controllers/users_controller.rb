@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   # app/controllers/users_controller.rb
-  before_action :authenticate_user!, only: [:show]
-
+  # before_action :authenticate_user!, only: [:show]
+  before_action :set_user, only: [:edit, :update, :destroy] 
   # GET /users or /users.json
   def index
     @users = User.all
@@ -25,7 +25,9 @@ class UsersController < ApplicationController
   end
 
   # GET /users/1/edit
-  def edit; end
+  def edit; 
+    @user = current_user
+  end
 
   # POST /users or /users.json
   def create
@@ -44,6 +46,7 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1 or /users/1.json
   def update
+    @user = current_user
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to user_url(@user), notice: 'User was successfully updated.' }
@@ -54,6 +57,7 @@ class UsersController < ApplicationController
       end
     end
   end
+
 
   # DELETE /users/1 or /users/1.json
   def destroy
@@ -75,6 +79,6 @@ class UsersController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def user_params
-    params.require(:user).permit(:name, :email, :avatar, :images)
+    params.require(:user).permit(:name, :email, :avatar, :bio, :images)
   end
 end

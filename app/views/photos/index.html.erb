@@ -1,92 +1,25 @@
-<style>
-  /* General styles */
-  .photo-images {
-    display: grid;
-    grid-gap: 10px;
-    justify-content: center;
-  }
+<h1 class="text-2xl font-bold mb-4">📸 Photo Feed</h1>
 
-  /* Mobile styles */
-  @media (max-width: 767px) {
-    .photo-images {
-      grid-template-columns: 1fr;
-    }
-  }
+<%= link_to 'Upload New Photo', new_photo_path, class: "bg-indigo-600 text-white px-4 py-2 rounded mb-4 inline-block" if user_signed_in? %>
 
-  /* Tablet styles */
-  @media (min-width: 768px) and (max-width: 1023px) {
-    .photo-images {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
 
-  /* Desktop styles */
-  @media (min-width: 1024px) {
-    .photo-images {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  /* Larger desktop styles */
-  @media (min-width: 1200px) {
-    .photo-images {
-      grid-template-columns: repeat(4, 1fr);
-    }
-  }
-
-  .photo-item {
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background: #f9f9f9;
-    padding: 8px;
-    margin: 10px;
-    padding-bottom: 20px;
-  }
-
-  /* Add styles for image container */
-  .image-container {
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background: #f9f9f9;
-    padding: 5px;
-  }
-
-  /* Add styles for image */
-  .photo-image {
-    width: 100%;
-    height: auto;
-    margin-bottom: 10px;
-  }
-
-  #photos {
-    margin: 20px;
-    padding: 20px;
-  }
-</style>
-
-<div id="photos" class="photo-images">
-  <% if @photos.any? { |photo| photo.images.attached? } %>
-    <% @photos.each do |photo| %>
-      <% if photo.images.attached? %>
-        <div class="photo-item">
-          <h2><%= photo.title %></h2>
-          <p><%= photo.description %></p>
-          <% photo.images.each_with_index do |image, index| %>
-            <div class="image-container">
-              <%= image_tag image, class: 'photo-image' %>
-            </div>
-          <% end %>
-          <p class="d-flex justify-content-between">
-            <%= link_to "Show", photo, class: "btn btn-info m-2" %>
-            <%= link_to "Edit", edit_photo_path(photo), class: 'btn btn-primary m-2' %>
-          </p>                  
-        </div>
-      <% end %>
+<% if @photos.any? %>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <% @photos.each_slice((@photos.size / 4.0).ceil).each do |column| %>
+      <div class="grid gap-4">
+        <% column.each do |photo| %>
+          <div>
+            <%= link_to photo_path(photo) do %>
+              <%= image_tag photo.images.first.variant(resize_to_limit: [600, nil]), 
+                            class: "w-full rounded-xl shadow hover:opacity-90 transition", 
+                            alt: photo.title, 
+                            loading: "lazy" if photo.images.attached? %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
     <% end %>
-  <% else %>
-    <p>No photos with images found.</p>
-  <% end %>
-</div>
-<div>
-  <%= link_to "New photo", new_photo_path, class: "btn btn-dark" %>
-</div>
+  </div>
+<% else %>
+  <p class="text-gray-500">No photos uploaded yet.</p>
+<% end %>

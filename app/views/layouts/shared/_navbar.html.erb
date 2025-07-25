@@ -1,59 +1,22 @@
-<%= stylesheet_link_tag 'application' %>
-<nav class="navbar navbar-expand-lg sticky-top" style="display: flex; justify-content: center; align-items: center; position: fixed; left: 0; width: 100%; background-color: #ffffff; color: #757575; padding: 6px;">
-  <div class="container-fluid">
-    <%= link_to root_path, class: "navbar-brand" do %>
-      <%= image_tag("ps-icon.png", alt: "Pix Share Logo", class: "logo-image", style: "max-height:50px; max-width:50px; border-radius: 10px;") %>
+<nav class="bg-white shadow-md mb-4 w-full">
+  <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+    <!-- Left: Logo -->
+    <%= link_to root_path do %>
+      <%= image_tag("ps-logo.png", alt: "Pix Share", class: "h-14 w-auto") %>
     <% end %>
 
-    <%= puts "Destroy User Session Path: #{destroy_user_session_path}" %>
-
-    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <!-- Right: Nav Links -->
+    <div class="flex items-center space-x-4">
       <% if user_signed_in? %>
-        <li class="nav-item">
-          <a class="nav-link" href="<%= new_photo_path %>">
-            <button type="button" class="btn btn-dark">
-              <%= bootstrap_icon "upload", width: 20, height: 20, fill: "white" %>
-            </button>
-          </a>
-        </li>
+        <%= link_to "Photos", photos_path(user_id: current_user.id), class: "text-gray-700 hover:text-purple-600 font-medium" %>
+
+
+        <%= link_to "Profile", user_path(current_user), class: "text-gray-700 hover:text-blue-600 font-medium" %>
+        <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "text-gray-700 hover:text-red-600 font-medium" %>
+      <% else %>
+        <%= link_to "Sign Up", new_user_registration_path, class: "text-gray-700 hover:text-green-600 font-medium" %>
+        <%= link_to "Login", new_user_session_path, class: "text-gray-700 hover:text-blue-600 font-medium" %>
       <% end %>
-    </ul>
-
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse align-items-center" id="navbarSupportedContent">
-      <form class="d-flex mx-auto" action="<%= search_index_path %>">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-dark" type="submit">Search</button>
-      </form>
-
-      <ul class="navbar-nav d-flex align-items-center">
-        <% if user_signed_in? %>
-          <li class="nav-item me-3">
-            <%= link_to user_path(current_user), class: "btn btn-outline-dark" do %>
-              My Profile
-            <% end %>
-          </li>
-          <li class="nav-item me-3">
-            <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
-            <a rel="nofollow" data-method="delete" href="<%= destroy_user_session_path %>" class="btn btn-outline-dark">Logout</a>
-          </li>
-          <li class="nav-item">
-            <%= link_to edit_user_registration_path, class: "nav-link" do %>
-              <%= image_tag(current_user.avatar, class: "avatar-image", style: "max-height:45px; max-width:45px; border-radius: 20%;") if current_user.avatar.attached? %>
-            <% end %>
-          </li>
-        <% else %>
-          <li class="nav-item me-3">
-            <a class="btn btn-outline-dark" href="<%= new_user_registration_path %>">Sign Up</a>
-          </li>
-          <li class="nav-item">
-            <a class="btn btn-outline-dark" href="<%= new_user_session_path %>">Login</a>
-          </li>
-        <% end %>
-      </ul>
     </div>
   </div>
 </nav>

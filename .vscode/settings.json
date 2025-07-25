@@ -1,0 +1,6 @@
+{
+  "ruby.interpreter.commandPath": "/Users/nashthedev/.rbenv/shims/ruby",
+  "solargraph.diagnostics": true,
+  "solargraph.useBundler": true,
+  "ruby.format": "auto"
+}

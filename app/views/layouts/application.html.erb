@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>PixShare</title>
+    <%= favicon_link_tag 'ps-icon.png' %>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -13,33 +14,12 @@
     <%= javascript_include_tag 'application' %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag 'application' %>
+    <%= stylesheet_link_tag "application" %>
   </head>  
   <body>
-    <div class="toast align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
-      <div class="d-flex">
-        <div class="toast-body">
-          <% if notice %> <p class="alert alert-success"><%= notice %></p> <% end %>
-        </div>
-        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-      </div>
-    </div>
-    <div class="toast align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
-      <div class="d-flex">
-        <div class="toast-body">
-          <% if alert %> <p class="alert alert-danger"><%= alert %></p> <% end %>
-        </div>
-        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-      </div>
-    </div>
-    <div>
-      <% if user_signed_in? %>
-        <%= link_to edit_user_registration_path, class: "nav-link" do %>
-          <%= image_tag(current_user.avatar, class: "avatar-image", style: "max-height:45px; max-width:45px; border-radius: 20%;") if current_user.avatar.attached? %>
-        <% end %>
-        <%= button_to "Log out", destroy_user_session_path, method: :delete %>
-      <% end %>
-    </div>
+    <%= render 'layouts/shared/navbar' %>
     <div class="container">
+  
       <%= yield %>
     </div>
     <%= render 'layouts/shared/footer' %>

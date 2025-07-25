@@ -1,8 +1,52 @@
-<!-- app/views/users/show.html.erb -->
-<%= render partial: 'user', locals: { user: @user, photo: @photo } %>
+<div class="max-w-4xl mx-auto px-4 py-8">
+  <div class="flex flex-col md:flex-row items-center md:items-start gap-6 mb-8">
+    <% if @user.avatar.attached? %>
+      <%= image_tag @user.avatar.variant(resize_to_limit: [150, 150]), class: "rounded-full shadow-md w-36 h-36 object-cover" %>
+    <% else %>
+      <div class="w-36 h-36 bg-gray-200 rounded-full flex items-center justify-center text-gray-500 text-xl">No Avatar</div>
+    <% end %>
 
-<div style="padding-bottom: 40px; padding-top: 20px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-  <%= link_to "Edit", edit_user_path(@user), class: "btn btn-dark" %>
+    <div class="text-center md:text-left">
+      <h1 class="text-2xl font-bold mb-2"><%= @user.name.presence || @user.email %>'s Profile</h1>
+      <p class="text-gray-700"><strong>Bio:</strong> <%= @user.bio.presence || "No bio yet." %></p>
+      <p class="text-gray-500"><strong>Joined:</strong> <%= @user.created_at.strftime("%B %d, %Y") %></p>
 
-  <!-- <%= button_to "Destroy this user", @user, method: :delete, class: "btn btn-danger" %> -->
+      <% if current_user == @user %>
+        <%= link_to "Edit Profile", edit_user_path(@user), class: "inline-block mt-4 text-blue-600 hover:underline" %>
+      <% end %>
+    </div>
+  </div>
+
+  <h2 class="text-xl font-semibold mb-4">📷 <%= @user.name.presence || @user.email %>'s Photos</h2>
+
+  <% if current_user == @user %>
+  <%= form_with url: bulk_destroy_photos_path, method: :delete, data: { turbo: false } do %>
+    <div class="text-right mb-4">
+      <%= submit_tag "🗑 Delete Selected", class: "bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700", data: { confirm: "Are you sure you want to delete the selected photos?" } %>
+    </div>
+
+    <div class="columns-2 md:columns-4 gap-4 space-y-4">
+      <% @user.photos.each do |photo| %>
+        <% photo.images.each do |image| %>
+          <div class="relative">
+            <%= image_tag image.variant(resize_to_limit: [600, nil]), loading: "lazy", class: "w-full rounded-xl shadow", alt: photo.title %>
+
+            <div class="absolute top-2 left-2 bg-white rounded p-1 shadow">
+              <%= check_box_tag "photo_ids[]", photo.id %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+  <% else %>
+    <div class="columns-2 md:columns-4 gap-4 space-y-4">
+      <% @user.photos.each do |photo| %>
+        <% photo.images.each do |image| %>
+          <%= image_tag image.variant(resize_to_limit: [600, nil]), loading: "lazy", class: "w-full rounded-xl shadow", alt: photo.title %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+
 </div>

@@ -1,32 +1,19 @@
-<%= form_with(model: photo) do |form| %>
-  <% if photo.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(photo.errors.count, "error") %> prohibited this photo from being saved:</h2>
-      <ul>
-        <% photo.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="mb-3">
-    <%= form.label :title, style: "display: block", class: "form-label" %>
-    <%= form.text_field :title, class: "form-control" %>
+<%= form_with(model: photo, local: true, html: { multipart: true, class: "space-y-4" }) do |form| %>
+  <div>
+    <%= form.label :title, class: "block font-bold" %>
+    <%= form.text_field :title, class: "w-full border rounded px-3 py-2" %>
   </div>
 
-  <div class="mb-3">
-    <%= form.label :description, style: "display: block", class: "form-label" %>
-    <%= form.text_area :description, class: "form-control" %>
+  <div>
+    <%= form.label :description, class: "block font-bold" %>
+    <%= form.text_area :description, class: "w-full border rounded px-3 py-2" %>
   </div>
 
-  <div class="field">
-    <%= form.label :images, class: "form-label" %>
-    <%= form.file_field :images, multiple: true, class: "form-control" %>
-    <p class="form-text">If you want to add new images or replace existing ones, please select them here.</p>
+  <div>
+    <%= form.label :images, "Upload Images", class: "block font-bold" %>
+    <%= form.file_field :images, multiple: true, class: "w-full" %>
   </div>
 
-  <div class="mb-3">
-    <%= form.submit "Add Photo", class: "btn btn-dark" %>
-  </div>
+
+  <%= form.submit class: "bg-green-600 text-white px-4 py-2 rounded" %>
 <% end %>

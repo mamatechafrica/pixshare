@@ -1,80 +1,67 @@
 class PhotosController < ApplicationController
-  before_action :set_user, only: [:create]
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :set_photo, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_user!, only: [:edit, :update, :destroy]
 
   def index
-    @photos = Photo.all
+    if params[:user_id]
+      @photos = Photo.where(user_id: params[:user_id]).order(created_at: :desc)
+    else
+      @photos = Photo.all.order(created_at: :desc)
+    end
+  end
+
+
+  def show
+    @comment = Comment.new
+    @comments = @photo.comments.includes(:user).order(created_at: :asc)
   end
 
   def new
-    @photo = Photo.new
+    @photo = current_user.photos.build
   end
 
   def create
-    @photo = @user.photos.build(photo_params)
-    @photo.images.attach(params[:photo][:images]) # This attaches the uploaded image
-
+    @photo = current_user.photos.build(photo_params)
     if @photo.save
-      redirect_to @photo, notice: 'Photo was successfully created.'
+      redirect_to @photo, notice: "Photo was successfully uploaded."
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
-  def show
-    @photo = Photo.find(params[:id])
-  end
-
-  # Add a new action to handle photo deletion
-  def destroy
-    @photo = Photo.find(params[:id])
-    image_id_to_delete = params[:image_id].to_i
-
-    # Check if the current user is the owner of the photo
-    if @photo.user == current_user
-      # Find and delete the image by its ID or index
-      if @photo.images[image_id_to_delete].present?
-        @photo.images[image_id_to_delete].purge
-        redirect_to @photo, notice: 'Image was successfully deleted.'
-      else
-        redirect_to @photo, alert: 'Image not found.'
-      end
-    else
-      # If the current user is not the owner, handle this as needed
-      redirect_to @photo, alert: 'You are not authorized to delete images from this photo.'
-    end
-  end
+  def edit; end
 
   def update
-    @photo = Photo.find(params[:id])
-
-    # Check if the current user is the owner of the photo
-    if @photo.user == current_user
-      # Start a transaction in case something fails
-      ActiveRecord::Base.transaction do
-        # Process any new images for attachment
-        @photo.images.attach(params[:photo][:images]) if params[:photo][:images]
-
-        # Update the photo's attributes
-        raise ActiveRecord::Rollback unless @photo.update(photo_params.except(:images))
-
-        redirect_to @photo, notice: 'Photo was successfully updated.'
-
-        # Rollback the transaction if update fails
-      end
+    if @photo.update(photo_params)
+      redirect_to @photo, notice: "Photo was successfully updated."
     else
-      # If the current user is not the owner, handle this as needed
-      redirect_to @photo, alert: 'You are not authorized to edit this photo.'
+      render :edit, status: :unprocessable_entity
     end
   end
 
-  def edit
-    @photo = Photo.find(params[:id])
+  def destroy
+    @photo.destroy
+    redirect_to photos_path, notice: "Photo deleted."
   end
+
+  def bulk_destroy
+    Photo.where(id: params[:photo_ids]).find_each do |photo|
+      photo.comments.destroy_all
+      photo.destroy
+    end
+    redirect_back fallback_location: photos_path, notice: "Selected photos deleted"
+  end
+
 
   private
 
-  def set_user
-    @user = current_user
+  def set_photo
+    @photo = Photo.find(params[:id])
+  end
+
+  def authorize_user!
+    redirect_to @photo, alert: "Not authorized" unless @photo.user == current_user
   end
 
   def photo_params

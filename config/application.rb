@@ -1,6 +1,7 @@
 require_relative "boot"
 
 require "rails/all"
+# require 'acts-as-taggable-on'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -11,6 +12,10 @@ module PixShare
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
     config.assets.enabled = true
+
+    if defined?(Sprockets)
+      Sprockets::SasscProcessor = nil
+    end
 
     # Configuration for the application, engines, and railties goes here.
     #

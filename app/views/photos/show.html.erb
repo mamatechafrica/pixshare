@@ -1,81 +1,21 @@
-<!-- <style>
-  /* General styles */
-  .photo-images {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    grid-gap: 10px;
-    justify-items: center;
-  }
+<h1 class="text-2xl font-bold"><%= @photo.title %></h1>
+<p class="text-gray-600 mb-2"><%= @photo.description %></p>
 
-  .photo-item {
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background: #f9f9f9;
-    padding: 8px;
-    margin: 10px;
-    padding-bottom: 20px;
-    text-align: center;
-  }
-
-  .image-container {
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background: #f9f9f9;
-    padding: 5px;
-  }
-
-  .photo-image {
-    width: 100%;
-    height: auto;
-    margin-bottom: 10px;
-  }
-
-  /* Mobile styles */
-  @media (max-width: 767px) {
-    .photo-images {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  /* Tablet styles */
-  @media (min-width: 768px) and (max-width: 1023px) {
-    .photo-images {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  /* Desktop styles */
-  @media (min-width: 1024px) {
-    .photo-images {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  /* Larger desktop styles */
-  @media (min-width: 1200px) {
-    .photo-images {
-      grid-template-columns: repeat(4, 1fr);
-    }
-  }
-</style> -->
-
-<div class="photo-item">
-  <h1><%= @photo.title %></h1>
-  <p><%= @photo.description %></p>
-
-  <div class="btn" style="margin-top: 10px; margin-bottom: 20px; text-align: center;">
-    <%= link_to 'Edit', edit_photo_path(@photo), class: 'btn btn-primary' %>
-  </div>
-
-  <% if @photo.images.attached? %>
-    <div class="photo-images">
-      <% @photo.images.each_with_index do |image, index| %>
-        <div class="image-container">
-          <%= image_tag image, class: 'photo-image' %>
-        </div>
-      <% end %>
-    </div>
-  <% else %>
-    <p>No images attached to this photo.</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+  <% @photo.images.each do |image| %>
+    <%= image_tag image.variant(resize_to_limit: [800, 600]), class: "rounded w-full h-auto" %>
   <% end %>
 </div>
+
+
+<hr class="my-6">
+
+<h2 class="text-xl font-bold mb-2">💬 Comments</h2>
+
+<%= render 'comments/form', photo: @photo, comment: @comment %>
+
+<% @comments.each do |comment| %>
+  <div class="bg-gray-100 p-3 rounded mb-2">
+    <strong><%= comment.user.email %></strong>: <%= comment.content %>
+  </div>
+<% end %>
