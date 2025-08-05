@@ -1,22 +1,67 @@
-<nav class="bg-white shadow-md mb-4 w-full">
-  <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-    <!-- Left: Logo -->
-    <%= link_to root_path do %>
-      <%= image_tag("ps-logo.png", alt: "Pix Share", class: "h-14 w-auto") %>
-    <% end %>
-
-    <!-- Right: Nav Links -->
-    <div class="flex items-center space-x-4">
-      <% if user_signed_in? %>
-        <%= link_to "Photos", photos_path(user_id: current_user.id), class: "text-gray-700 hover:text-purple-600 font-medium" %>
-
-
-        <%= link_to "Profile", user_path(current_user), class: "text-gray-700 hover:text-blue-600 font-medium" %>
-        <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "text-gray-700 hover:text-red-600 font-medium" %>
-      <% else %>
-        <%= link_to "Sign Up", new_user_registration_path, class: "text-gray-700 hover:text-green-600 font-medium" %>
-        <%= link_to "Login", new_user_session_path, class: "text-gray-700 hover:text-blue-600 font-medium" %>
+<nav class="bg-white shadow-md w-full sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 py-3">
+    <div class="flex items-center justify-between">
+      <!-- Left: Logo -->
+      <%= link_to root_path, class: "flex-shrink-0" do %>
+        <%= image_tag("ps-logo.png", alt: "Pix Share", class: "h-14 w-auto") %>
       <% end %>
+
+      <!-- Mobile menu button -->
+      <button type="button" class="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500" aria-controls="mobile-menu" aria-expanded="false" onclick="toggleMobileMenu()">
+        <span class="sr-only">Open main menu</span>
+        <!-- Menu icon (closed state) -->
+        <svg id="menu-icon" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <!-- Close icon (open state) -->
+        <svg id="close-icon" class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+      <!-- Desktop menu -->
+      <div class="hidden md:flex items-center space-x-4">
+        <% if user_signed_in? %>
+          <%= link_to "Photos", photos_path(user_id: current_user.id), class: "text-gray-700 hover:text-purple-600 font-medium px-3 py-2 rounded-md" %>
+          <%= link_to "Profile", user_path(current_user), class: "text-gray-700 hover:text-blue-600 font-medium px-3 py-2 rounded-md" %>
+          <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "text-gray-700 hover:text-red-600 font-medium px-3 py-2 rounded-md" %>
+        <% else %>
+          <%= link_to "Sign Up", new_user_registration_path, class: "text-gray-700 hover:text-green-600 font-medium px-3 py-2 rounded-md" %>
+          <%= link_to "Login", new_user_session_path, class: "text-gray-700 hover:text-blue-600 font-medium px-3 py-2 rounded-md" %>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Mobile menu (hidden by default) -->
+    <div id="mobile-menu" class="md:hidden hidden">
+      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <% if user_signed_in? %>
+          <%= link_to "Photos", photos_path(user_id: current_user.id), class: "text-gray-700 hover:text-purple-600 block px-3 py-2 rounded-md text-base font-medium" %>
+          <%= link_to "Profile", user_path(current_user), class: "text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium" %>
+          <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "text-gray-700 hover:text-red-600 block px-3 py-2 rounded-md text-base font-medium" %>
+        <% else %>
+          <%= link_to "Sign Up", new_user_registration_path, class: "text-gray-700 hover:text-green-600 block px-3 py-2 rounded-md text-base font-medium" %>
+          <%= link_to "Login", new_user_session_path, class: "text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium" %>
+        <% end %>
+      </div>
     </div>
   </div>
+
+  <script>
+    function toggleMobileMenu() {
+      const mobileMenu = document.getElementById('mobile-menu');
+      const menuIcon = document.getElementById('menu-icon');
+      const closeIcon = document.getElementById('close-icon');
+      
+      if (mobileMenu.classList.contains('hidden')) {
+        mobileMenu.classList.remove('hidden');
+        menuIcon.classList.add('hidden');
+        closeIcon.classList.remove('hidden');
+      } else {
+        mobileMenu.classList.add('hidden');
+        menuIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+      }
+    }
+  </script>
 </nav>

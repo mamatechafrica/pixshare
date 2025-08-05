@@ -1,3 +1,38 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom responsive utilities */
+@layer utilities {
+  .min-h-screen-safe {
+    min-height: 100vh;
+    min-height: 100dvh; /* Dynamic viewport height for mobile browsers */
+  }
+  
+  /* Ensure better mobile scrolling */
+  .scroll-smooth {
+    scroll-behavior: smooth;
+  }
+  
+  /* Custom animation delays */
+  .animate-delay-500 {
+    animation-delay: 500ms;
+  }
+  
+  .animate-delay-1000 {
+    animation-delay: 1000ms;
+  }
+}
+
+/* Ensure proper mobile navigation */
+@media (max-width: 768px) {
+  .navbar-mobile {
+    transition: all 0.3s ease-in-out;
+  }
+}
+
+/* Custom hover effects */
+.btn-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
